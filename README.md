@@ -1,4 +1,5 @@
 # AirBnB Clone - The Console
+<img src="hbnb_step5.png" alt="" loading='lazy' style="" /></p>
 The console is the first segment of the AirBnB project at Holberton School that will collectively cover fundamental concepts of higher level programming. The goal of AirBnB project is to eventually deploy our server a simple copy of the AirBnB Website(HBnB). A command interpreter is created in this segment to manage objects for the AirBnB(HBnB) website.
 
 #### Functionalities of this command interpreter:
@@ -18,6 +19,86 @@ The console is the first segment of the AirBnB project at Holberton School that 
 * [Authors](#authors)
 * [License](#license)
 
+<h2>Resources</h2>
+
+<p><strong>Read or watch</strong>:</p>
+
+<ul>
+<li><a href="/rltoken/Bl2mJVVG07XCP6E8qtsQMg" title="Selector" target="_blank">Selector</a> </li>
+<li><a href="/rltoken/oM3b0a0FGTy6AQ_UJ201Yw" title="Get and set content" target="_blank">Get and set content</a> </li>
+<li><a href="/rltoken/LL2uScQvjWnj2ZEx2CzxXw" title="Manipulate CSS classes" target="_blank">Manipulate CSS classes</a> </li>
+<li><a href="/rltoken/6JtTz9SaNX3AyVXht4tMYA" title="Manipulate DOM elements" target="_blank">Manipulate DOM elements</a> </li>
+<li><a href="/rltoken/1AbzN1nEfBKoSjB-9kjmrA" title="Document ready" target="_blank">Document ready</a> </li>
+<li><a href="/rltoken/OGDoIOd0cdmwDJFJy4aw5w" title="Introduction" target="_blank">Introduction</a> </li>
+<li><a href="/rltoken/kmBzs_QPD72Oz--Yk80JHw" title="GET &amp; POST request" target="_blank">GET &amp; POST request</a> </li>
+<li><a href="/rltoken/tzqJx5SS5cF1BW_lAnXqqg" title="HTTP access control (CORS)" target="_blank">HTTP access control (CORS)</a> </li>
+</ul>
+
+<h2>Learning Objectives</h2>
+
+<p>At the end of this project, you are expected to be able to <a href="/rltoken/_ii906pZ1sg8gkAF1dvsNQ" title="explain to anyone" target="_blank">explain to anyone</a>, <strong>without the help of Google</strong>:</p>
+
+<h3>General</h3>
+
+<ul>
+<li>How cool it is to request your own API</li>
+<li>How to modify an HTML element style</li>
+<li>How to get and update an HTML element content</li>
+<li>How to modify the DOM</li>
+<li>How to make a <code>GET</code> request with JQuery Ajax</li>
+<li>How to make a <code>POST</code> request with JQuery Ajax</li>
+<li>How to listen/bind to DOM events</li>
+<li>How to listen/bind to user events</li>
+</ul>
+
+<h2>More Info</h2>
+
+<h3>Import JQuery</h3>
+
+<pre><code>&lt;head&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+</code></pre>
+
+<h3>Before starting the project&hellip;</h3>
+
+<p>You will work on a codebase using <a href="/rltoken/VmGDpw_DCN16OJt_UoqsDQ" title="Flasgger" target="_blank">Flasgger</a>, you will need to install it locally first before starting the RestAPI:</p>
+
+<pre><code>$ sudo apt-get install -y python3-lxml
+$ sudo pip3 install flask_cors # if it was not installed yet
+$ sudo pip3 install flasgger
+</code></pre>
+
+<p>If the RestAPI is not starting, please read the error message. 
+Based on the(ses) error message(s), you will have to troubleshoot potential dependencies issues. </p>
+
+<p>Here some solutions:</p>
+
+<h4><code>jsonschema</code> exception</h4>
+
+<pre><code>$ sudo pip3 uninstall -y jsonschema 
+$ sudo pip3 install jsonschema==3.0.1
+</code></pre>
+
+<h4><code>No module named &#39;pathlib2&#39;</code></h4>
+
+<pre><code>$ sudo pip3 install pathlib2
+</code></pre>
+
+<h3>Expose ports from your Vagrant</h3>
+
+<p>In your <code>Vagrantfile</code>, add this line for each port forwarded</p>
+
+<pre><code># I expose the port 5001 of my vm to the port 5001 on my computer
+config.vm.network :forwarded_port, guest: 5001, host: 5001 
+</code></pre>
+
+<p>if you need to expose other ports, same line but you will need to replace the &ldquo;guest port&rdquo; (inside your vagrant) and your &ldquo;host port&rdquo; (outside your vagrant, used from your browser for example)</p>
+
+<p>It&rsquo;s important in your project, to use the AirBnB API with the port <code>5001</code></p>
+
+<p><br />
+<br />
 ## Environment
 This project is interpreted/tested on Ubuntu 14.04 LTS using python3 (version 3.4.3)
 
