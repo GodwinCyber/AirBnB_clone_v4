@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-"""0-hbnb.py"""
+"""2-hbnb.py"""
 from models import storage
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from os import environs
+# from models.state import State
+# from models.city import City
+# from models.amenity import Amenity
+# from models.place import Place
+# from os import environs
 from flask import Flask, render_template
 import uuid
 
@@ -20,7 +20,7 @@ def teardown_db(exception):
     storage.close()
 
 
-@app.route('/0-hbnb/')
+@app.route('/2-hbnb/')
 def hbnb_filters(the_id=None):
     """replace the existing route to /2-hbnb/"""
     stateObjs = storage.all('State').values()
