@@ -16,7 +16,7 @@ $(document).ready(function() {
   });
 
   // Request to the status API
-  $.get('http://0.0.0.0:5001/api/v1/status/', function(data) {
+  $.get('http://127.0.01:5001/api/v1/status/', function(data) {
     if (data.status === 'OK') {
       $('#api_status').addClass('available');
     } else {
