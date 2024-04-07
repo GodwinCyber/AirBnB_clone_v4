@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""0-hbnb.py"""
+"""1-hbnb.py"""
 from flask import Flask, render_template
 from models import storage
 import uuid
@@ -25,7 +25,7 @@ def hbnb_filters(the_id=None):
     allUser = dict([User.id, "{} {}".format(User.first_name, User.last_name)]
                  for User in storage.all('User').values())
     cache_id = (str(uuid.uuid4()))
-    return render_template('1-hbnb.html', states=allState, amens=allAmen,
+    return render_template('1-hbnb.html', states=allState, amenities=allAmen,
                            places=allPlace, users=allUser, cache_id=cache_id)
 
 
