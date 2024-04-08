@@ -1,22 +1,15 @@
 $(document).ready(function() {
-  const selectedAmenities = {};
-
+  const selected_Amenities = {};
   $('.amenities input[type="checkbox"]').change(function() {
-    const amenityId = $(this).data('id');
-    const amenityName = $(this).data('name');
-
     if (this.checked) {
-      selectedAmenities[amenityId] = amenityName;
+      selected_Amenities[$(this).data('id')] = $(this).data('name');
     } else {
-      delete selectedAmenities[amenityId];
+      delete selected_Amenities[$(this).data('id')];
     }
-
-    const amenitiesList = Object.values(selectedAmenities).join(', ');
-    $('.amenities h4').text(amenitiesList);
+    const amenities_List = Object.values(selected_Amenities).join(', ');
+    $('.amenities h4').text(amenities_List);
   });
-
-  // Request to the status API
-
+  //api
   $.getJSON('http://0.0.0.0:5001/api/v1/status/', function(data) {
     if (data.status === 'OK') {
       $('div#api_status').addClass('available');

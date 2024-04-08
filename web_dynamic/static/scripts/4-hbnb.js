@@ -1,21 +1,15 @@
 $(document).ready(function() {
-  const selectedAmenities = {};
-
+  const selected_Amenities = {};
   $('.amenities input[type="checkbox"]').change(function() {
-    const amenityId = $(this).data('id');
-    const amenityName = $(this).data('name');
-
     if (this.checked) {
-      selectedAmenities[amenityId] = amenityName;
+      selected_Amenities[$(this).data('id')] = $(this).data('name');
     } else {
-      delete selectedAmenities[amenityId];
+      delete selected_Amenities[$(this).data('id')];
     }
-
-    const amenitiesList = Object.values(selectedAmenities).join(', ');
-    $('.amenities h4').text(amenitiesList);
+    const amenities_List = Object.values(selected_Amenities).join(', ');
+    $('.amenities h4').text(amenities_List);
   });
-
-  // Request to the status API
+  //api
   $.get('http://0.0.0.0:5001/api/v1/status/', function(data) {
     if (data.status === 'OK') {
       $('#api_status').addClass('available');
@@ -23,43 +17,33 @@ $(document).ready(function() {
       $('#api_status').removeClass('available');
     }
   });
-
-  // Request to the places_search API
-  function fetchPlaces(amenities) {
-    $.ajax({
-      url: 'http://0.0.0.0:5001/api/v1/places_search/',
-      type: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify({ amenities: amenities }),
-      success: function(data) {
-        $('.places').empty();
-        data.forEach(function(place) {
-          const article = $('<article>');
-
-          const titleBox = $('<div>').addClass('title_box');
-          titleBox.append($('<h2>').text(place.name));
-          titleBox.append($('<div>').addClass('price_by_night').text('$' + place.price_by_night));
-
-          const information = $('<div>').addClass('information');
-          information.append($('<div>').addClass('max_guest').text(place.max_guest + ' Guest' + (place.max_guest !== 1 ? 's' : '')));
-          information.append($('<div>').addClass('number_rooms').text(place.number_rooms + ' Bedroom' + (place.number_rooms !== 1 ? 's' : '')));
-          information.append($('<div>').addClass('number_bathrooms').text(place.number_bathrooms + ' Bathroom' + (place.number_bathrooms !== 1 ? 's' : '')));
-
-          const description = $('<div>').addClass('description').html(place.description);
-
-          article.append(titleBox);
-          article.append(information);
-          article.append(description);
-
-          $('.places').append(article);
-        });
-      }
-    });
-  }
-
-  // When the button is clicked, make a POST request with the list of Amenities checked
+  //api
+  $.ajax({
+    url: 'http://0.0.0.0:5001/api/v1/places_search/',
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({}),
+    success: function(data) {
+      $('.places').empty();
+      data.forEach(function(place) {
+        const Artcl = $('<article>');
+        const BlockTitle = $('<div>').addClass('title_box');
+        BlockTitle.append($('<h2>').text(place.name));
+        BlockTitle.append($('<div>').addClass('price_by_night').text('$' + place.price_by_night));
+        const Info = $('<div>').addClass('information');
+        Info.append($('<div>').addClass('max_guest').text(place.max_guest + ' Guest' + (place.max_guest !== 1 ? 's' : '')));
+        Info.append($('<div>').addClass('number_rooms').text(place.number_rooms + ' Bedroom' + (place.number_rooms !== 1 ? 's' : '')));
+        Info.append($('<div>').addClass('number_bathrooms').text(place.number_bathrooms + ' Bathroom' + (place.number_bathrooms !== 1 ? 's' : '')));
+        const Discr = $('<div>').addClass('description').html(place.Discr);
+        Artcl.append(BlockTitle);
+        Artcl.append(Info);
+        Artcl.append(Discr);
+        $('.places').append(Artcl);
+      });
+    }
+  });
+  //button clicked
   $('button').click(function() {
-    const amenityIds = Object.keys(selectedAmenities);
-    fetchPlaces(amenityIds);
+    fetchPlaces(Object.keys(selectedAmenities));
   });
 });

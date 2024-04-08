@@ -1,12 +1,10 @@
 $(document).ready(function() {
   const selected_Amenities = {};
   $('.amenities input[type="checkbox"]').change(function() {
-    const amenity_Id = $(this).data('id');
-    const amenity_Name = $(this).data('name');
     if (this.checked) {
-      selected_Amenities[amenity_Id] = amenity_Name;
+      selected_Amenities[$(this).data('id')] = $(this).data('name');
     } else {
-      delete selected_Amenities[amenity_Id];
+      delete selected_Amenities[$(this).data('id')];
     }
     const amenities_List = Object.values(selected_Amenities).join(', ');
     $('.amenities h4').text(amenities_List);

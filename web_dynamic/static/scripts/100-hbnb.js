@@ -1,40 +1,24 @@
 $(document).ready(function() {
-  const selectedAmenities = {};
-  const selectedLocations = {};
-
-  function updateLocationsH4() {
-    const locationsList = Object.values(selectedLocations).join(', ');
-    $('.locations h4').text(locationsList);
-  }
-
+  const selected_Amenities = {};
   $('.amenities input[type="checkbox"]').change(function() {
-    const amenityId = $(this).data('id');
-    const amenityName = $(this).data('name');
-
     if (this.checked) {
-      selectedAmenities[amenityId] = amenityName;
+      selected_Amenities[$(this).data('id')] = $(this).data('name');
     } else {
-      delete selectedAmenities[amenityId];
+      delete selected_Amenities[$(this).data('id')];
     }
-
-    const amenitiesList = Object.values(selectedAmenities).join(', ');
-    $('.amenities h4').text(amenitiesList);
+    const amenities_List = Object.values(selected_Amenities).join(', ');
+    $('.amenities h4').text(amenities_List);
   });
-
   $('.locations input[type="checkbox"]').change(function() {
-    const locationId = $(this).data('id');
-    const locationName = $(this).data('name');
-
     if (this.checked) {
-      selectedLocations[locationId] = locationName;
+      selectedLocations[$(this).data('id')] = $(this).data('name');
     } else {
-      delete selectedLocations[locationId];
+      delete selectedLocations[$(this).data('id')];
     }
-
     updateLocationsH4();
   });
 
-  // Request to the status API
+  //api
   $.get('http://0.0.0.0:5001/api/v1/status/', function(data) {
     if (data.status === 'OK') {
       $('#api_status').addClass('available');
@@ -43,9 +27,9 @@ $(document).ready(function() {
     }
   });
 
-  // Function to fetch places with the selected filters
-  function fetchPlacesWithFilters() {
-    const filters = {
+  //fetchselected filters
+  function PlacesFilters() {
+    const Filter = {
       amenities: Object.keys(selectedAmenities),
       states: Object.keys(selectedLocations).filter(id => id.startsWith('st')),
       cities: Object.keys(selectedLocations).filter(id => id.startsWith('ci'))
@@ -55,20 +39,17 @@ $(document).ready(function() {
       url: 'http://0.0.0.0:5001/api/v1/places_search/',
       type: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify(filters),
+      data: JSON.stringify(Filter),
       success: function(data) {
         $('.places').empty();
         data.forEach(function(place) {
-          const article = $('<article>');
-
-          // ... code to create and append the article for each place ...
-
-          $('.places').append(article);
+          const Articl = $('<article>');
+          $('.places').append(Articl);
         });
       }
     });
   }
 
-  // When the button is clicked, make a POST request with the selected filters
-  $('button').click(fetchPlacesWithFilters);
+  //selected filters
+  $('button').click(PlacesFilters);
 });
